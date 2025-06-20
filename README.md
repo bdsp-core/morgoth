@@ -192,3 +192,6 @@ if indices.max() >= x.size(1) or indices.min() < 0:
 
 When encountering pandas and numpy compatibility issues, please reinstall NumPy 1.26.4 using Conda instead of pip.
 
+```bash
+conda install numpy=1.26.4
+```
