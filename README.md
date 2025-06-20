@@ -35,7 +35,7 @@ conda create -n morgoth python=3.12
 
 conda activate morgoth
 
-pip install -r requirements.txt
+pip install -r requirements.txt / conda install --file requirements.txt
 
 # If you have GPU with cuda driver
 conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
