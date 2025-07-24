@@ -1,4 +1,4 @@
-password="exxact@1"
+password="" # add you password for sudo
 
 
 echo "$password" | sudo -S  $(which python) segment_long_eeg.py segment \
