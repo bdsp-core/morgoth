@@ -170,12 +170,6 @@ conda install numpy=1.26.4
 ```
 
 
-## 📬 Contact
-
-For questions, please contact:  
-Chenxi Sun – csun8@bidmc.harvard.edu
-
-
 ## 🚨 Update 
 
 ### 2025-06-08
@@ -221,3 +215,8 @@ This script will automatically segment the EEG files and batch them through Morg
 continuous_event_level_longeeg.sh included examples in the script for IIIC, spike, slowing, and burst suppression detection. You can follow a similar format for other tasks. Just make sure to keep the --eval_sub_dir path consistent across all commands.
 
 If you need to merge the segment-level results into a full-length prediction, note that you can’t just concatenate them — due to the sliding step, you’ll need to align each segment by padding the predictions before merging.
+
+## 📬 Contact
+
+For questions, please contact:  
+Chenxi Sun – csun8@bidmc.harvard.edu
