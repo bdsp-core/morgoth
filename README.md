@@ -216,7 +216,7 @@ This script will automatically segment the EEG files and batch them through Morg
 --eeg_dir test_data/longEEG/raw \                 # directory containing the original raw EEG files 
 --eval_sub_dir test_data/longEEG/segments_raw \   # directory to store the segmented files
 
-```bash
+```bash 
 
 continuous_event_level_longeeg.sh included examples in the script for IIIC, spike, slowing, and burst suppression detection. You can follow a similar format for other tasks. Just make sure to keep the --eval_sub_dir path consistent across all commands.
 
