@@ -203,15 +203,19 @@ conda install numpy=1.26.4
 If you cannnot run Morgoth on long EEG files because of GPU memory limitations. To perform continuous event-level detection, run the following command:
 
 ```bash
+
 bash continuous_event_level_longeeg.sh
+
 ```
 This script will automatically segment the EEG files and batch them through Morgoth. The final output will contain predictions for each segment. In the script, you’ll need to specify the following arguments:
 
 ```bash
+
 --data_format edf \                               # format of the raw EEG data 
 --segment_duration 600 \                          # duration of each segment in seconds (here, 10 minutes) 
 --eeg_dir test_data/longEEG/raw \                 # directory containing the original raw EEG files 
 --eval_sub_dir test_data/longEEG/segments_raw \   # directory to store the segmented files
+
 ```bash
 
 continuous_event_level_longeeg.sh included examples in the script for IIIC, spike, slowing, and burst suppression detection. You can follow a similar format for other tasks. Just make sure to keep the --eval_sub_dir path consistent across all commands.
