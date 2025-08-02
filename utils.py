@@ -2393,7 +2393,8 @@ def resize_array_along_axis0(arr, d, target_length):
     if d==1:
         return arr[indices]
     else:
-        return arr[indices:,]
+        # return arr[indices:,]
+        return arr[indices,: ]
 
 def split_nd_to_plus1d(arr, segment_shape):
 
