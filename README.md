@@ -221,7 +221,18 @@ If you need to merge the segment-level results into a full-length prediction, no
 
 Wrong code in utils.py resize_array_along_axis0()
 
-Change return arr[indices:,] to return arr[indices,: ]
+Change 
+
+```bash
+return arr[indices:,]
+```
+
+to 
+
+```bash
+return arr[indices,: ]
+```
+
 
 ## 📬 Contact
 
