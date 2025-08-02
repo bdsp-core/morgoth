@@ -216,6 +216,13 @@ continuous_event_level_longeeg.sh included examples in the script for IIIC, spik
 
 If you need to merge the segment-level results into a full-length prediction, note that you can’t just concatenate them — due to the sliding step, you’ll need to align each segment by padding the predictions before merging.
 
+
+### 2025-08-02
+
+Wrong code in utils.py resize_array_along_axis0()
+
+Change return arr[indices:,] to return arr[indices,: ]
+
 ## 📬 Contact
 
 For questions, please contact:  
