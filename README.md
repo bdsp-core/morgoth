@@ -234,7 +234,7 @@ return arr[indices,: ]
 ```
 
 
-### 2025-08-02
+### 2025-09-25
 
 If your GPU driver is ≤ 550, please switch to a different CUDA version (e.g., pytorch-cuda=12.1)
 
