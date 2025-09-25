@@ -234,6 +234,20 @@ return arr[indices,: ]
 ```
 
 
+### 2025-08-02
+
+If your GPU driver is ≤ 550, please switch to a different CUDA version (e.g., pytorch-cuda=12.1)
+
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+```
+
+to
+
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+```
+
 ## 📬 Contact
 
 For questions, please contact:  
