@@ -268,6 +268,12 @@ conda activate morgoth
 conda install -y -c pytorch -c nvidia  pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4
 ```
 
+If 404:
+
+```bash
+conda install -y -c pytorch -c nvidia/label/cuda-12.4.127 pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4
+```
+
 3. pip others
 
 change requirements.txt to:
