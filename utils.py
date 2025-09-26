@@ -1547,7 +1547,7 @@ class ContinuousToSnippetDataset(torch.utils.data.Dataset):
             if has_formatted_channel:
                 if self.type == 'SLEEPPSG':
                     if signal.shape[0]==19:
-                        signal = signal[[0, 1, 6, 11, 12, 17], :]
+                        signal = signal[[1, 2, 7, 12, 13, 18], :]
                     else:
                         signal =signal[:6,:]
                     original_avg = False
@@ -1637,7 +1637,7 @@ class ContinuousToSnippetDataset(torch.utils.data.Dataset):
             # new_channel_names={ch_name: ch_name.split('-')[0] for ch_name in channels}
             # raw.rename_channels(new_channel_names)
 
-            # Remove the reference name in the channel names 如果去除后有重复，就不去除
+            # Remove the reference name in the channel names 
             # Create a mapping of new channel names
 
             # new_channel_names = {ch_name: ch_name.split('-')[0] for ch_name in channels}
@@ -1663,7 +1663,6 @@ class ContinuousToSnippetDataset(torch.utils.data.Dataset):
 
             channels=raw.ch_names
 
-            # sleep必须有6个通道
             if self.type=='SLEEPPSG':
                 if set(channels).issuperset(set(sleep_channels1)):
                     selected_channels = sleep_channels1
@@ -1764,7 +1763,7 @@ class ContinuousToSnippetDataset(torch.utils.data.Dataset):
 
         if step_in_point:
             original_step = step
-            new_step = max(int(original_step / self.self_fs * self.fs), 1)  # 最小step 1 point
+            new_step = max(int(original_step / self.self_fs * self.fs), 1)  
         else:
             original_step = int(step * self.self_fs)
             new_step = int(step * self.fs)
