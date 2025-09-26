@@ -248,6 +248,67 @@ to
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 ```
 
+### 2025-09-26
+
+It shows a torch._C error: this may be due to the Conda version itself. Newer Conda uses different download sources than older ones, so the CUDA installed by Conda conflicted with the Torch installed by pip. To fix this, I removed torch from requirements.txt and modified the Conda installation command to install Torch with Conda instead. In other words, the installation steps for Conda and pip needed to be swapped.
+
+1. Create and activate the environment
+   
+```bash
+conda create -n morgoth python=3.12 
+ ```
+
+```bash
+conda activate morgoth
+```
+
+2. conda torch cuda
+
+```bash
+conda install -y -c pytorch -c nvidia  pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4
+```
+
+3. pip others
+
+change requirements.txt to:
+
+```bash
+apex==0.9.10dev
+botocore==1.34.154
+einops==0.8.0
+h5py==3.12.1
+hdf5storage==0.1.19
+mat73==0.65
+matplotlib==3.9.2
+mne==1.8.0
+mne_connectivity==0.7.0
+mypy==1.11.2
+pandas==1.5.3
+pyhealth==1.1.6
+pytz==2024.1
+scikit-learn==1.5.2
+scipy==1.14.1
+sympy==1.13.2
+tensorboardX==1.8
+timm==1.0.11
+tqdm==4.66.5
+pytest==7.4.4
+colorcet==3.1.0
+protobuf==3.20.3
+numpy==1.26.4
+```
+
+```bash
+pip install -r requirements.txt 
+```
+
+4. If pandas or numpy error
+
+```bash
+conda install numpy=1.26.4 
+```
+
+
 ## 📬 Contact
 
 For questions, please contact:  
