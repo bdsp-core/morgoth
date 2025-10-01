@@ -3,13 +3,13 @@
 
 This repository contains code and tools for running EEG analysis using **Morgoth**, including and event-level and EEG-level detection with probabilities for:
 
-- Normal / Abnormal
-- Slowing: No Slowing / Focal Slowing / Generalized Slowing
-- Burst suppression: No / Burst suppression
-- Spike detection: No / Spike
-- Spike localization: No / Focal Spike / Generalized Spike  
-- IIIC classification: Other / Seizure / LPD / GPD / LRDA / GRDA
-- Sleep staging: Awake / N1 / N2 / N3 / REM
+- Normal / Abnormal (binary)
+- Slowing: No Slowing / Focal Slowing / Generalized Slowing (in the same order as each column in the corresponding output file)
+- Burst suppression: No / Burst suppression (binary)
+- Spike detection: No / Spike (binary)
+- Spike localization: No / Focal Spike / Generalized Spike  (in the same order as each column in the corresponding output file)
+- IIIC classification: Other / Seizure / LPD / GPD / LRDA / GRDA (in the same order as each column in the corresponding output file)
+- Sleep staging: Awake / N1 / N2 / N3 / REM (in the same order as each column in the corresponding output file)
 ## 📁 Directory Structure
 
 ```
