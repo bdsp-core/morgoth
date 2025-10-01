@@ -9,7 +9,8 @@ This repository contains code and tools for running EEG analysis using **Morgoth
 - Spike detection: No / Spike (binary)
 - Spike localization: No / Focal Spike / Generalized Spike  (in the same order as each column in the corresponding output file)
 - IIIC classification: Other / Seizure / LPD / GPD / LRDA / GRDA (in the same order as each column in the corresponding output file)
-- Sleep staging: Awake / N1 / N2 / N3 / REM (in the same order as each column in the corresponding output file)
+- Sleep staging (5 stages): Awake / N1 / N2 / N3 / REM (in the same order as each column in the corresponding output file)
+- Sleep staging (3 stages): Awake / N1 / N2 (in the same order as each column in the corresponding output file)
 ## 📁 Directory Structure
 
 ```
