@@ -1,0 +1,112 @@
+Pretraining parameter reference
+================================
+
+train_tokenizer.py
+--------------------
+--model                     Registered tokenizer name: morgoth_tokenizer_base
+                             (12-layer, default), morgoth_tokenizer_large
+                             (24-layer), morgoth_tokenizer_base_fsq (Finite
+                             Scalar Quantization instead of the learned EMA
+                             codebook).
+--codebook_n_emd            Number of codebook entries. Default: 8192.
+--codebook_emd_dim          Codebook vector dimension. Default: 64.
+--ema_decay                 EMA decay rate for the codebook. Default: 0.99.
+--quantize_kmeans_init       Flag. Use k-means to initialize the codebook.
+--input_size                 Raw EEG samples per channel. Default: 1600.
+--contrastive_weight        NT-Xent/InfoNCE loss weight added on top of the
+                             reconstruction losses. Default: 0.0 = disabled.
+                             Commonly used value if enabled: 0.1.
+--contrastive_temperature   NT-Xent temperature, used when
+                             --contrastive_weight > 0. Default: 0.1.
+--opt                       Optimizer name. Default: adamw.
+--opt_betas                 Adam betas, e.g. 0.9 0.99.
+--opt_eps                   Adam epsilon. Default: 1e-8.
+--weight_decay               Default: 1e-4.
+--weight_decay_end           Final weight decay (defaults to --weight_decay).
+--clip_grad                 Gradient clipping norm (unset = no clipping).
+--lr                        Peak learning rate. Default: 5e-5.
+--min_lr                    Minimum learning rate. Default: 1e-5.
+--warmup_lr                 Starting learning rate during warmup. Default: 1e-6.
+--warmup_epochs              Default: 1.
+--warmup_steps               Overrides --warmup_epochs if > 0. Default: -1.
+--batch_size                 Default: 128.
+--epochs                     Default: 2.
+--save_ckpt_freq             Default: 1.
+--output_dir                 Checkpoint directory.
+--log_dir                    TensorBoard log directory.
+--device                     Default: cuda.
+--seed                       Default: 0.
+--resume                     Path to resume from.
+--auto_resume / --no_auto_resume   Default: on.
+--dist_eval                  Default: on.
+--disable_eval                Default: off.
+--eval                        Evaluation-only mode. Default: off.
+--calculate_codebook_usage    Report codebook utilization stats. Default: off.
+--start_epoch                 Default: 0.
+--num_workers                 Default: 10.
+--pin_mem / --no_pin_mem      Default: on.
+--world_size, --local_rank, --dist_on_itp, --dist_url   DDP plumbing.
+
+
+train_transformer.py
+------------------------
+--model                     Registered backbone name, paired with --objective:
+                             morgoth_pretrain_base (5M, default), _large (50M),
+                             _huge (380M), _mae, _contrastive, _causal.
+--objective                 mem (default) -- predict each masked patch's VQ
+                               token index via cross-entropy (bidirectional,
+                               BEiT-style). Pair with morgoth_pretrain_base/large/huge.
+                             mae -- predict the masked patch's raw signal
+                               directly (MSE regression) instead of its VQ
+                               token index. Pair with morgoth_pretrain_base_mae.
+                             contrastive -- mem plus an NT-Xent term between two
+                               augmented views (reuses the model's
+                               projection_head). Pair with
+                               morgoth_pretrain_base_contrastive and set
+                               --contrastive_weight > 0.
+                             causal -- GPT-style, no masking, causal attention,
+                               predicts the VQ token of the next patch in
+                               sequence order. --mask_ratio is ignored. Pair
+                               with morgoth_pretrain_base_causal.
+--tokenizer_model           Tokenizer name matching --tokenizer_weight.
+                             Default: morgoth_tokenizer_base.
+--tokenizer_weight          Path to the frozen tokenizer checkpoint.
+--mask_ratio                Fraction of patches masked (mem/mae/contrastive;
+                             ignored by causal). Default: 0.5.
+--contrastive_weight        NT-Xent weight, used when --objective contrastive.
+                             Default: 0.1.
+--contrastive_temperature   NT-Xent temperature, used when --objective
+                             contrastive. Default: 0.1.
+--layer_scale_init_value    Layer-scale gamma init. 0.1 for base, 1e-5 for
+                             large, 0 to disable. Default: 0.1.
+--drop_path                  Stochastic depth rate. Default: 0.
+--codebook_size              Must match the tokenizer's --codebook_n_emd.
+                             Default: 8192.
+--codebook_dim                Must match the tokenizer's --codebook_emd_dim.
+                             Default: 64.
+--abs_pos_emb                 Use absolute position embedding. Default: on.
+--rel_pos_bias / --disable_rel_pos_bias   Default: off.
+--input_size                  Raw EEG samples per channel. Default: 1600.
+--opt                         Default: adamw.
+--opt_betas                    e.g. 0.9 0.98.
+--opt_eps                      Default: 1e-8.
+--weight_decay                 Default: 0.05.
+--weight_decay_end             Defaults to --weight_decay.
+--clip_grad                    Default: 3.0.
+--momentum                     SGD-family optimizers only. Default: 0.9.
+--lr                           Default: 5e-4.
+--min_lr                       Default: 1e-5.
+--warmup_lr                    Default: 1e-6.
+--warmup_epochs                Default: 1.
+--warmup_steps                 Overrides --warmup_epochs if > 0. Default: -1.
+--gradient_accumulation_steps  Default: 1.
+--batch_size                   Default: 128.
+--epochs                       Default: 2.
+--save_ckpt_freq               Default: 1.
+--output_dir / --log_dir
+--device                       Default: cuda.
+--seed                         Default: 0.
+--resume, --auto_resume / --no_auto_resume, --start_epoch
+--num_workers                   Default: 10.
+--pin_mem / --no_pin_mem
+--world_size, --local_rank, --dist_on_itp, --dist_url   DDP plumbing.

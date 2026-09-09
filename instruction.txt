@@ -1,0 +1,60 @@
+
+1. Set up the runtime environment
+
+In Morgoth_20250401/
+
+	conda create -n morgoth python=3.12 # conda create -n morgoth python=3.11
+
+	conda activate morgoth
+
+If you have GPU with cuda driver, run
+
+	pip install -r requirements.txt # pip install -r requirements_cuda122.txt
+
+	conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+
+	# conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+
+Else windows:
+
+    pip install -r requirements_windows.txt
+
+
+2. Run continuous prediction by continuous_event_level.sh
+
+Run code: bash continuous_event_level.sh
+
+See the comments at the beginning of the Bash file to understand the meaning of each parameter in the command.
+
+p.s. The data in test_data folder was based on the Dropbox path and raw data.
+
+
+
+3. Run discrete prediction by discrete_event_level.sh
+
+Run code: bash discrete_event_level.sh
+
+See the comments at the beginning of the Bash file to understand the meaning of each parameter in the command.
+	
+p.s. The data in test_data folder should be processed first.
+
+
+
+4. Run EEG level prediction by EEG_level.sh
+
+Run code: bash EEG_level.sh
+
+See the comments at the beginning of the Bash file to understand the meaning of each parameter in the command.
+
+p.s. The EEG_level inputs are the event-level output results with 1-second slipping step.
+
+
+5. If linux and cpu
+
+Run code: bash EEG_level_cpu.sh
+
+
+6. If windows and cpu
+
+Run code: EEG_level_windows_cpu.bat
+
