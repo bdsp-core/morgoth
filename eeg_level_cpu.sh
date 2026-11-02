@@ -1,6 +1,5 @@
 # if you do not have gpu, to use cpu by using python command and adding "-device cpu" and "--distributed False" as follow
 
-password="exxact@1"
 
 # Sandor-100 case
 dataset_dir="test_data/Sandor/EDF"
@@ -17,7 +16,7 @@ rewrite_results='no'
 #  Normal:
      # (1). Continuous 1-second step event-level prediction
 
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/NORMAL.pth \
@@ -38,7 +37,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
             --rewrite_results ${rewrite_results}
 
     # (2). EEG_level prediction
-echo "$password" | sudo -S  $(which python) EEG_level_head.py \
+sudo $(which python) EEG_level_head.py \
         --mode predict \
         --dataset NORMAL \
         --task_model checkpoints/NORMAL_EEGlevel.pth \
@@ -49,7 +48,7 @@ echo "$password" | sudo -S  $(which python) EEG_level_head.py \
 
 #  Slowing:
     # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/SLOWING.pth \
@@ -72,7 +71,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
     # (2). EEG_level prediction (FOC_SLOWING and GEN_SLOWING are seperated)
 SLOWING_datasets=("FOC_SLOWING" "GEN_SLOWING")
 for SLOWING_dataset in "${SLOWING_datasets[@]}"; do
-    echo "$password" | sudo -S  $(which python) EEG_level_head.py \
+    sudo $(which python) EEG_level_head.py \
             --mode predict \
             --dataset ${SLOWING_dataset} \
             --task_model checkpoints/${SLOWING_dataset}_EEGlevel.pth \
@@ -83,7 +82,7 @@ done
 
 # BS
   # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/BS.pth \
@@ -105,7 +104,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
 
 
   # (2). EEG_level prediction
-echo "$password" | sudo -S  $(which python) EEG_level_head.py \
+sudo $(which python) EEG_level_head.py \
           --mode predict \
           --dataset BS \
           --task_model checkpoints/BS_EEGlevel.pth \
@@ -116,7 +115,7 @@ echo "$password" | sudo -S  $(which python) EEG_level_head.py \
 
 # FOC GEN SPIKES:
     # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/FOCGENSPIKES.pth \
@@ -140,7 +139,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
     # (2). EEG_level prediction (FOC_SPIKES and GEN_SPIKES are seperated)
 FOC_GEN_SPIKES_datasets=("FOC_SPIKES" "GEN_SPIKES")
 for FOC_GEN_SPIKES_dataset in "${FOC_GEN_SPIKES_datasets[@]}"; do
-    echo "$password" | sudo -S  $(which python) EEG_level_head.py \
+    sudo $(which python) EEG_level_head.py \
             --mode predict \
             --dataset ${FOC_GEN_SPIKES_dataset} \
             --task_model checkpoints/${FOC_GEN_SPIKES_dataset}_EEGlevel.pth \
@@ -151,7 +150,7 @@ done
 
 # Spike
   # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/SPIKES.pth \
@@ -173,7 +172,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
 
 
   # (2). EEG_level prediction
-echo "$password" | sudo -S  $(which python) EEG_level_head.py \
+sudo $(which python) EEG_level_head.py \
           --mode predict \
           --dataset SPIKES \
           --task_model checkpoints/SPIKES_EEGlevel.pth \
@@ -184,7 +183,7 @@ echo "$password" | sudo -S  $(which python) EEG_level_head.py \
 
 # IIIC
     # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/IIIC.pth \
@@ -208,7 +207,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
     # (2). EEG_level prediction (SEIZURE, LPD, GPD, LRDA, GRDA are seperated)
 IIIC_datasets=("SEIZURE" "LPD" "GPD" "LRDA" "GRDA")
 for IIIC_dataset in "${IIIC_datasets[@]}"; do
-    echo "$password" | sudo -S  $(which python) EEG_level_head.py \
+    sudo $(which python) EEG_level_head.py \
             --mode predict \
             --dataset ${IIIC_dataset} \
             --task_model checkpoints/${IIIC_dataset}_EEGlevel.pth \
@@ -219,7 +218,7 @@ done
 
 # Sleep 5 stage
     # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/SLEEPPSG.pth \
@@ -239,7 +238,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
             --distributed False \
             --rewrite_results ${rewrite_results}
 
-echo password | sudo -S $(which python)  EEG_level_head.py \
+sudo $(which python)  EEG_level_head.py \
         --mode predict \
         --dataset SLEEPPSG \
         --test_csv_dir  ${result_dir}/pred_SLEEPPSG_1sStep \
@@ -248,7 +247,7 @@ echo password | sudo -S $(which python)  EEG_level_head.py \
 
 # Sleep 3 stage
     # (1). Continuous 1-second step event-level prediction
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/SLEEP.pth \
@@ -269,7 +268,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classificatio
             --rewrite_results ${rewrite_results}
 
 
-echo "$password" | sudo -S $(which python)  EEG_level_head.py \
+sudo $(which python)  EEG_level_head.py \
         --mode predict \
         --dataset SLEEP3stages \
         --test_csv_dir  ${result_dir}/pred_SLEEP3stages_1sStep \

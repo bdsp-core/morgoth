@@ -25,10 +25,9 @@
 #--leave_one_hemisphere_out no or left or right or middel (Set the EEG signals to 0 for the left, right, or middle hemisphere)
 #--rewrite_results no | yes (Default no Overwrite the original results when new results are available.)
 
-password="exxact@1"
 
 # 1. IIIC-------------------------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -50,7 +49,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # 2. SPIKES--------------------------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -69,7 +68,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
             --prediction_slipping_step 1 \
             --smooth_result ema
 
-echo "$password" |  sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
            --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -92,7 +91,7 @@ echo "$password" |  sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribut
 
 
 # 3. Focal/Generalized Spikes--------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -112,7 +111,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # 4. Slowing--------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -132,7 +131,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # 5. BS--------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -152,7 +151,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # 6. NORMAL--------------------------------------------------------
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -172,7 +171,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 7. SLEEP 3 stages with 19 channels --------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/SLEEP.pth \
@@ -192,7 +191,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # 8. SLEEP 5 stages with 6 channels --------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --predict \
             --model morgoth_backbone_base \
             --task_model checkpoints/SLEEPPSG.pth \
@@ -213,7 +212,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 ######################################## IF USING CPU #######################################
 # if you do not have gpu, to use cpu by using python command and adding "-device cpu" and "--distributed False" as follow
-#echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) finetune_classification.py \
 #            --abs_pos_emb \
 #            --model morgoth_backbone_base \
 #            --predict \

@@ -16,10 +16,9 @@
 # nb_classes: SPIKES/NORMAL/BS 1; IIIC 6; SLOWING/FOC_GEN_SPIKES/MGBSLEEP3stages 3; SLEEPPSG 5
 # Output results will be saved in pred.csv in eval_sub_dir folder
 
-password="exxact@1"
 
 # 1. Spikes
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --eval \
             --model morgoth_backbone_base \
@@ -32,7 +31,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 2. Seizure+IIIC
-echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --eval \
             --model morgoth_backbone_base \
@@ -45,7 +44,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 # 3. Focal Generalized Slowing
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model morgoth_backbone_base \
@@ -57,7 +56,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 
 
 ## 4. Focal Generalized Spikes
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model morgoth_backbone_base \
@@ -70,7 +69,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 #
 #
 ## 5. Burst Suppression
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port= finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port= finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model morgoth_backbone_base \
@@ -83,7 +82,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 #
 #
 ## 6. Normal
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model morgoth_backbone_base \
@@ -96,7 +95,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 #
 #
 ## 7. Sleep staging (5 stages; input 6 EEG channels)
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model morgoth_backbone_base \
@@ -109,7 +108,7 @@ echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribute
 #
 #
 ## 8. Sleep staging (3 stages; input 19 EEG channels)
-#echo "$password" | sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+#sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
 #            --abs_pos_emb \
 #            --eval \
 #            --model morgoth_backbone_base \
