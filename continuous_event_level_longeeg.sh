@@ -1,7 +1,6 @@
-password="" # add you password for sudo
 
 
-echo "$password" | sudo -S  $(which python) segment_long_eeg.py segment \
+sudo $(which python) segment_long_eeg.py segment \
             --data_format edf  \
             --segment_duration 600 \
             --eeg_dir test_data/longEEG/raw   \
@@ -9,7 +8,7 @@ echo "$password" | sudo -S  $(which python) segment_long_eeg.py segment \
 
 
 # IIIC-------------------------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=1 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -28,7 +27,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # Spike--------------------------------------------------------
-echo "$password" |  sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=3 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=3 finetune_classification.py \
            --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -48,7 +47,7 @@ echo "$password" |  sudo -S OMP_NUM_THREADS=1 $(which python) -m torch.distribut
 
 
 # Slowing--------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12346 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12346 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \
@@ -68,7 +67,7 @@ echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.r
 
 
 # BS--------------------------------------------------------
-echo "$password" | sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12346 finetune_classification.py \
+sudo OMP_NUM_THREADS=1 $(which python) -m torch.distributed.run --nnodes=1 --nproc_per_node=2 --master_port=12346 finetune_classification.py \
             --abs_pos_emb \
             --model morgoth_backbone_base \
             --predict \

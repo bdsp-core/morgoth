@@ -135,7 +135,7 @@ To train a Morgoth model from scratch using your own data:
 You should modify the data_provider.py script according to your dataset
 
 ```bash
-echo password | sudo -S ~/miniconda3/envs/torchenv/bin/python data_provider.py
+sudo ~/miniconda3/envs/torchenv/bin/python data_provider.py
 ```
 
 ### 2. Run the pretraining scripts:

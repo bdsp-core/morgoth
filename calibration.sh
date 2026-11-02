@@ -5,7 +5,7 @@ class_number=(0 1 2 3 4 5)
 class_name=('Other' 'Seizure' 'LPD' 'GPD' 'LRDA' 'GRDA')
 
 for ((i=0; i<${#class_number[@]}; i++ )); do
-  echo "exxact@1" | sudo -S  $(which python) calibration.py train \
+  sudo $(which python) calibration.py train \
       --file_path /home/exx/Desktop/calibration/IIIC/IIICOutput_Morgoth_SPaRCNet_KaggleWinner_30experts.csv \
       --pred_column M_class_${class_number[$i]}_prob \
       --class_number ${class_number[$i]} \
@@ -21,7 +21,7 @@ for ((i=0; i<${#class_number[@]}; i++ )); do
       'Sarah Schmitt' 'Susan T. Herman' 'Olga Taraschenko' 'Zubeda Sheikh'
 
 
-  echo "exxact@1" | sudo -S  $(which python) calibration.py apply \
+  sudo $(which python) calibration.py apply \
   --new_data_path /home/exx/Desktop/calibration/IIIC/IIICOutput_Morgoth_SPaRCNet_KaggleWinner_30experts.csv \
   --pred_column  M_class_${class_number[$i]}_prob \
   --output_path /home/exx/Desktop/calibration/IIIC/results/${class_name[$i]}_calibration.csv \
@@ -35,13 +35,13 @@ done
 
 
 #SN2
-echo "exxact@1" | sudo -S  $(which python) calibration.py train \
+sudo $(which python) calibration.py train \
     --file_path /home/exx/Desktop/calibration/SN2/SpikesOutput_Morgoth_SpikeNet_24experts.csv \
     --pred_column M_pred \
     --calibration_task_dir /home/exx/Desktop/calibration/SN2/ \
 
 
-echo "exxact@1" | sudo -S  $(which python) calibration.py apply \
+sudo $(which python) calibration.py apply \
   --new_data_path /home/exx/Desktop/calibration/SN2/SpikesOutput_Morgoth_SpikeNet_24experts.csv \
   --pred_column  M_pred \
   --output_path /home/exx/Desktop/calibration/SN2/results/Spikes_calibration.csv \
@@ -55,14 +55,14 @@ file_list=('NormalOutput_Morgoth_ScoreAI_experts.xlsx' 'FocalSlowingOutput_Morgo
 class_name=('Normal' 'FocalSlowing' 'GenSlowing' 'FocalSpike' 'GenSpike')
 
 for ((i=0; i<${#file_list[@]}; i++ )); do
-  echo "exxact@1" | sudo -S  $(which python) calibration.py train \
+  sudo $(which python) calibration.py train \
       --file_path /home/exx/Desktop/calibration/SAI/${file_list[$i]} \
       --pred_column M_pred \
       --class_name ${class_name[$i]} \
       --calibration_task_dir /home/exx/Desktop/calibration/SAI \
       --expert_columns 'expert_0' 'expert_1' 'expert_2' 'expert_3' 'expert_4' 'expert_5' 'expert_6' 'expert_8' 'expert_9' 'expert_10' 'expert_11' 'expert_12' 'expert_12' 'expert_14'
 
-  echo "exxact@1" | sudo -S  $(which python) calibration.py apply \
+  sudo $(which python) calibration.py apply \
     --new_data_path /home/exx/Desktop/calibration/SAI/${file_list[$i]}  \
     --pred_column  M_pred \
     --output_path /home/exx/Desktop/calibration/SAI/results/${class_name[$i]}_calibration.csv \
@@ -78,7 +78,7 @@ class_number=(0 1 2 3 4)
 class_name=('Awake' 'N1' 'N2' 'N3' 'REM')
 
 for ((i=0; i<${#class_number[@]}; i++ )); do
-  echo "exxact@1" | sudo -S  $(which python) calibration.py train \
+  sudo $(which python) calibration.py train \
       --file_path /home/exx/Desktop/calibration/UPenn/UPennOutput_Morgoth_USleep_experts.csv \
       --pred_column M_class_${class_number[$i]}_prob \
       --class_number ${class_number[$i]} \
@@ -87,7 +87,7 @@ for ((i=0; i<${#class_number[@]}; i++ )); do
       'stage_expert_2' 'stage_expert_3' 'stage_expert_4' 'stage_expert_5'
 
 
-  echo "exxact@1" | sudo -S  $(which python) calibration.py apply \
+  sudo $(which python) calibration.py apply \
   --new_data_path /home/exx/Desktop/calibration/UPenn/UPennOutput_Morgoth_USleep_experts.csv \
   --pred_column  M_class_${class_number[$i]}_prob \
   --output_path /home/exx/Desktop/calibration/UPenn/results/${class_name[$i]}_calibration.csv \
@@ -123,7 +123,7 @@ for ((i=0; i<${#file_list[@]}; i++)); do
     class_num=${class_numbers[$j]}
     class_name=${class_names[$j]}
 
-    echo "exxact@1" | sudo -S  $(which python) calibration.py train \
+    sudo $(which python) calibration.py train \
         --file_path  "/home/exx/Desktop/calibration/MoE/${file_list[$i]}" \
         --pred_column "class_${class_num}_prob" \
         --class_number "${class_num}" \
@@ -131,7 +131,7 @@ for ((i=0; i<${#file_list[@]}; i++)); do
         --calibration_task_dir /home/exx/Desktop/calibration/MoE/ \
         --expert_columns 'expert_amorim' 'expert_bappavu' 'expert_bwestove' 'expert_danielgoldenholz' 'expert_ioanniskarakis' 'expert_jeroengijs' 'expert_jiyeounyoo' 'expert_jlee38' 'expert_larcotjayagopal' 'expert_marcusng' 'expert_olhataraschenko' 'expert_oselioutski' 'expert_osmangamaleldin' 'expert_pkaplan' 'expert_sfzafar' 'expert_ufisch' 'expert_wkong' 'expert_zubedasheikh' 'expert_afstruck' 'expert_humbertocastrolima' 'expert_alineherlopian'
 
-    echo "exxact@1" | sudo -S  $(which python) calibration.py apply \
+    sudo $(which python) calibration.py apply \
         --new_data_path "/home/exx/Desktop/calibration/MoE/${file_list[$i]}" \
         --pred_column "class_${class_num}_prob" \
         --output_path "/home/exx/Desktop/calibration/MoE/results/${class_name}_calibration.csv" \
@@ -148,14 +148,14 @@ file_list=('FocalSlowingOutput_Morgoth_experts.xlsx' 'GenSlowingOutput_Morgoth_e
 class_name=('FocalSlowing' 'GenSlowing' 'FocalSpike' 'GenSpike')
 
 for ((i=0; i<${#file_list[@]}; i++ )); do
-  echo "exxact@1" | sudo -S  $(which python) calibration.py train \
+  sudo $(which python) calibration.py train \
       --file_path /home/exx/Desktop/calibration/ON/${file_list[$i]} \
       --pred_column M_pred \
       --class_name ${class_name[$i]} \
       --calibration_task_dir /home/exx/Desktop/calibration/ON \
       --expert_columns 'expert_20' 'expert_21' 'expert_24' 'expert_26' 'expert_27' 'expert_28' 'expert_30' 'expert_33' 'expert_36' 'expert_39' 'expert_40' 'expert_41' 'expert_46' 'expert_48'
 
-  echo "exxact@1" | sudo -S  $(which python) calibration.py apply \
+  sudo $(which python) calibration.py apply \
     --new_data_path /home/exx/Desktop/calibration/ON/${file_list[$i]}  \
     --pred_column M_pred \
     --output_path /home/exx/Desktop/calibration/ON/results/${class_name[$i]}_calibration.csv \
